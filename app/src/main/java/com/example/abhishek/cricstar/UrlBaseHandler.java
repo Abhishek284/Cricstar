@@ -26,8 +26,7 @@ public class UrlBaseHandler {
                         );
 
         Retrofit retrofit =
-                builder
-                        .client(
+                builder.client(
                                 httpClient.build()
                         )
                         .build();

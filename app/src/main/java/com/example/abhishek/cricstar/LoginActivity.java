@@ -3,6 +3,8 @@ package com.example.abhishek.cricstar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +25,10 @@ public class LoginActivity extends AppCompatActivity {
         xx.enqueue(new Callback<DataParse>() {
            @Override
            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
+               DataParse abc = new DataParse();
+               abc.getMatchesList();
 
+            System.out.println(response);
 
            }
 
