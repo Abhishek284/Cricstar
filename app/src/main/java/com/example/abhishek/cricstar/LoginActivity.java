@@ -1,13 +1,8 @@
 package com.example.abhishek.cricstar;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 
-import java.util.List;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,19 +13,23 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+@Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
-localTest asd = new localTest();
-       GitHubClient client = localTest.ABC();
-       Call<GitHubRepo> xx = client.getTopRatedMovies("5C1QA2CZnqhcZgcgSc64ok2PpJy2");
-       xx.enqueue(new Callback<GitHubRepo>() {
+
+       // UrlBaseHandler asd = new UrlBaseHandler();
+        CricketEndpoints client = UrlBaseHandler.BaseUrl();
+        Call<DataParse> xx = client.getAllUpcomingMatches("5C1QA2CZnqhcZgcgSc64ok2PpJy2");
+        xx.enqueue(new Callback<DataParse>() {
            @Override
-           public void onResponse(Call<GitHubRepo> call, Response<GitHubRepo> response) {
+           public void onResponse(Call<DataParse> call, Response<DataParse> response) {
+
 
            }
 
            @Override
-           public void onFailure(Call<GitHubRepo> call, Throwable t) {
+           public void onFailure(Call<DataParse> call, Throwable t) {
+
 
            }
        });

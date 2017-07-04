@@ -10,22 +10,24 @@ import java.util.List;
  * Created by abhishek on 04/07/17.
  */
 
-public class GitHubRepo {
+public class DataParse {
 
-    private List<Matches> matches;
+    private List<JasonKeys> matches;
 
-    public List<Matches> getMatchesList() {
+    public List<JasonKeys> getMatchesList() {
         return matches;
     }
 
-    public void setMatchesList(List<Matches> matchesList) {
+    public void setMatchesList(List<JasonKeys> matchesList) {
         this.matches = matchesList;
     }
 
-    private class Matches{
+    private class JasonKeys{
         private long unique_id;
         private String date;
         private boolean squad;
+        private boolean matchStarted;
+
 
         public long getUnique_id() {
             return unique_id;
@@ -59,7 +61,6 @@ public class GitHubRepo {
             this.matchStarted = matchStarted;
         }
 
-        private boolean matchStarted;
 
 
     }

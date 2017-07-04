@@ -8,14 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by abhishek on 04/07/17.
  */
 
-public class localTest {
+public class UrlBaseHandler {
 
 
-    public localTest() {
 
-    }
 
-    public static GitHubClient ABC(){
+    public static CricketEndpoints BaseUrl(){
         String API_BASE_URL = "http://cricapi.com";
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -34,7 +32,7 @@ public class localTest {
                         )
                         .build();
 
-        return retrofit.create(GitHubClient.class);
+        return retrofit.create(CricketEndpoints.class);
 
 
     }
