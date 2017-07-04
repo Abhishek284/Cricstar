@@ -16,5 +16,8 @@ public class LoginActivity extends AppCompatActivity {
 
    }
 
+    //https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
+    //https://futurestud.io/tutorials/retrofit-getting-started-and-android-client
+
 
 }
