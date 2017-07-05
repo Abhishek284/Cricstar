@@ -30,8 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_activity);
 
-       // UrlBaseHandler asd = new UrlBaseHandler();
+
         CricketEndpoints client = UrlBaseHandler.BaseUrl();
         Call<DataParse> xx = client.getAllUpcomingMatches("5C1QA2CZnqhcZgcgSc64ok2PpJy2");
         xx.enqueue(new Callback<DataParse>() {
@@ -39,26 +40,12 @@ public class LoginActivity extends AppCompatActivity {
            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
 
 
-               Gson gson = new Gson();
-               String result = gson.toJson(response.body());
-               //abc = gson.fromJson(, DataParse.class);
-                System.out.println("passed");
-               System.out.println(result);
-               System.out.println(response.body());
-               System.out.println(response);
-               System.out.println(response.code());
-               System.out.println(response.message());
-               DataParse abc = new DataParse();
                matchesListxx = response.body().getMatchesList();
                source = response.body().getProvider().getSource();
                creditsLeft = response.body().getCreditsLeft();
 
                d= response.body().getV();
                System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
-               //System.out.println("Abhi"+ "matchesList" + matchesListxx.size());
-
-
-
 
 
 
