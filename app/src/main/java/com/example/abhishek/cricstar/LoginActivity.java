@@ -2,9 +2,13 @@ package com.example.abhishek.cricstar;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,8 +20,14 @@ import retrofit2.Response;
  */
 
 public class LoginActivity extends AppCompatActivity {
+    List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
 
-@Override
+    public String source;
+    public String d ;
+    public int creditsLeft;
+
+
+    @Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
 
@@ -27,13 +37,33 @@ public class LoginActivity extends AppCompatActivity {
         xx.enqueue(new Callback<DataParse>() {
            @Override
            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
-               DataParse abc = new DataParse();
+
 
                Gson gson = new Gson();
-               String tf = gson.toJson(response.body());
+               String result = gson.toJson(response.body());
+               //abc = gson.fromJson(, DataParse.class);
+                System.out.println("passed");
+               System.out.println(result);
+               System.out.println(response.body());
+               System.out.println(response);
+               System.out.println(response.code());
+               System.out.println(response.message());
+               DataParse abc = new DataParse();
+               matchesListxx = response.body().getMatchesList();
+               source = response.body().getProvider().getSource();
+               creditsLeft = response.body().getCreditsLeft();
 
-            System.out.println("passed");
-               System.out.println(tf);
+               d= response.body().getV();
+               System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
+               //System.out.println("Abhi"+ "matchesList" + matchesListxx.size());
+
+
+
+
+
+
+
+
 
            }
 
@@ -43,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
            }
+
        });
+
+
    }
 
 
