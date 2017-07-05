@@ -3,6 +3,8 @@ package com.example.abhishek.cricstar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,14 +28,18 @@ public class LoginActivity extends AppCompatActivity {
            @Override
            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
                DataParse abc = new DataParse();
-               abc.getMatchesList();
 
-            System.out.println(response);
+               Gson gson = new Gson();
+               String tf = gson.toJson(response.body());
+
+            System.out.println("passed");
+               System.out.println(tf);
 
            }
 
            @Override
            public void onFailure(Call<DataParse> call, Throwable t) {
+               System.out.println("failed");
 
 
            }

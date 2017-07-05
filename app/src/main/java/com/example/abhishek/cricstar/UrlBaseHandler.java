@@ -1,5 +1,7 @@
 package com.example.abhishek.cricstar;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,7 +18,8 @@ public class UrlBaseHandler {
     public static CricketEndpoints BaseUrl(){
         String API_BASE_URL = "http://cricapi.com";
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS);
 
         Retrofit.Builder builder =
                 new Retrofit.Builder()
