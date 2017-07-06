@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,43 +32,37 @@ public class LoginActivity extends AppCompatActivity {
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
-
-        CricketEndpoints client = UrlBaseHandler.BaseUrl();
-        Call<DataParse> xx = client.getAllUpcomingMatches("5C1QA2CZnqhcZgcgSc64ok2PpJy2");
-        xx.enqueue(new Callback<DataParse>() {
-           @Override
-           public void onResponse(Call<DataParse> call, Response<DataParse> response) {
-
-
-               matchesListxx = response.body().getMatchesList();
-               source = response.body().getProvider().getSource();
-               creditsLeft = response.body().getCreditsLeft();
-
-               d= response.body().getV();
-               System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
-
-
-
-
-
-
-           }
-
-           @Override
-           public void onFailure(Call<DataParse> call, Throwable t) {
-               System.out.println("failed");
-
-
-           }
-
-       });
-
+        CallApiAllMatches();
 
    }
 
 
-    //https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
+    public void CallApiAllMatches(){
+
+        CricketEndpoints client = UrlBaseHandler.BaseUrl();
+        Call<DataParse> call = client.getAllUpcomingMatches(AllStrings.API_KEY);
+        call.enqueue(new Callback<DataParse>() {
+            @Override
+            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
+                matchesListxx = response.body().getMatchesList();
+                source = response.body().getProvider().getSource();
+                creditsLeft = response.body().getCreditsLeft();
+                d= response.body().getV();
+                System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
+            }
+            @Override
+            public void onFailure(Call<DataParse> call, Throwable t) {
+                System.out.println("failed");
+            }
+
+        });
+
+
+    }
+
+
+    //Refrerences
+    // https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
     //https://futurestud.io/tutorials/retrofit-getting-started-and-android-client
 
 
