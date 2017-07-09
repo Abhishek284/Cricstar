@@ -3,6 +3,8 @@ package com.example.abhishek.cricstar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -23,6 +25,9 @@ public class DashboardActivity extends AppCompatActivity {
     CharSequence text = "API call Successfull";
     int duration = Toast.LENGTH_SHORT;
     private ProgressBar spinner;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,17 @@ public class DashboardActivity extends AppCompatActivity {
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
         CallApiAllMatches();
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+//        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
 
     }
 
@@ -63,6 +79,10 @@ public class DashboardActivity extends AppCompatActivity {
                 creditsLeft = response.body().getCreditsLeft();
                 d= response.body().getV();
                 System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
+                mAdapter = new MyAdapter(matchesListxx);
+                mRecyclerView.setAdapter(mAdapter);
+
+
             }
 
             @Override
