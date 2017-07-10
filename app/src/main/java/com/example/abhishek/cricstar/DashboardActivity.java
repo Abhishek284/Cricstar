@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    TextView CreditsLeftText,SourceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     protected void onResume(){
         super.onResume();
+        CreditsLeftText = (TextView) findViewById(R.id.credits_left);
+        SourceText = (TextView) findViewById(R.id.source_text);
+
 
 
     }
@@ -81,6 +86,8 @@ public class DashboardActivity extends AppCompatActivity {
                 System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
                 mAdapter = new MyAdapter(matchesListxx);
                 mRecyclerView.setAdapter(mAdapter);
+                CreditsLeftText.setText(String.valueOf(response.body().getCreditsLeft()));
+                SourceText.setText(String.valueOf(response.body().getProvider().getSource()));
 
 
             }
