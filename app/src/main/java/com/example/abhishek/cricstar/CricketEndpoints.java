@@ -1,8 +1,11 @@
 package com.example.abhishek.cricstar;
 
+import com.google.gson.annotations.SerializedName;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -11,11 +14,16 @@ import retrofit2.http.Query;
  */
 
 public interface CricketEndpoints {
-    @GET("/api/matches")
-    Call<DataParse> getAllUpcomingMatches(@Query("apikey") String apiKey);
+    @SerializedName("Content-Type")
+    public String ContentType =null;
+    @POST("/api/matches")
 
-//    @POST("/api/Criket")
-//    Call<DataParse> getAllUpcomingMatchesii(@Body Clas.object apiKey);
+    Call<DataParse> getAllUpcomingMatches(@Header("apikey") String apikey);
+
+
+//    @POST("/api/matches")
+//    Call<DataParse> getAllUpcomingMatches(@Header("ContentType") String ContentType, @Body DashboardActivity.ReqBody reqBody);
+
 
 
 

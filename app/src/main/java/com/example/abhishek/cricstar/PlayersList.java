@@ -1,0 +1,68 @@
+package com.example.abhishek.cricstar;
+
+import java.util.List;
+
+/**
+ * Created by abhishek on 11/07/17.
+ */
+
+public class PlayersList {
+    public List<Squad> getSquad() {
+        return squad;
+    }
+
+    public void setSquad(List<Squad> squad) {
+        this.squad = squad;
+    }
+
+    public List<Squad> squad;
+
+    public class Squad{
+        public String countryName;
+
+        public List<Players> getPlayers() {
+            return players;
+        }
+
+        public void setPlayers(List<Players> players) {
+            this.players = players;
+        }
+
+        public String getCountryName() {
+            return countryName;
+        }
+
+        public void setCountryName(String countryName) {
+            this.countryName = countryName;
+        }
+
+        public List<Players> players;
+
+
+
+        public class Players{
+            public String pid;
+
+            public String getPlayerName() {
+                return playerName;
+            }
+
+            public void setPlayerName(String playerName) {
+                this.playerName = playerName;
+            }
+
+            public String getPid() {
+                return pid;
+            }
+
+            public void setPid(String pid) {
+                this.pid = pid;
+            }
+
+            public String playerName;
+
+        }
+
+    }
+
+}
