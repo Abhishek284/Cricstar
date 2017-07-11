@@ -30,12 +30,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textView = view.findViewById(R.id.click);
+        textView.setOnClickListener(this);
+        login_button = view.findViewById(R.id.login_button);
+        login_button.setOnClickListener(this);
+
+    }
+
     public void onResume(){
         super.onResume();
-        textView = getView().findViewById(R.id.click);
-        textView.setOnClickListener(this);
-        login_button = getView().findViewById(R.id.login_button);
-        login_button.setOnClickListener(this);
+
 
     }
 

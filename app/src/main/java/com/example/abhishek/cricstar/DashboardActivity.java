@@ -24,18 +24,18 @@ import retrofit2.Response;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener,MyListener{
     List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
 
-    public String source;
-    public String d ;
-    public int creditsLeft;
-    CharSequence text = "API call Successfull";
-    int duration = Toast.LENGTH_SHORT;
+    private String source;
+    private String d ;
+    private int creditsLeft;
+    private CharSequence text = "API call Successfull";
+    private int duration = Toast.LENGTH_SHORT;
     private ProgressBar spinner;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    TextView CreditsLeftText,SourceText;
-    android.view.MenuItem menuItem;
-    View view ;
+    private TextView CreditsLeftText,SourceText;
+    private android.view.MenuItem menuItem;
+    private View view ;
 
 
 
@@ -45,7 +45,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
-        CallApiAllMatches();
+        callApiAllMatches();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -92,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
 
-    public void showToast()
+    private void showToast()
     {
         Toast.makeText(this, text, duration).show();
     }
@@ -111,7 +111,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
 
-    public void CallApiAllMatches() {
+    private void callApiAllMatches() {
 
         CricketEndpoints client = UrlBaseHandler.BaseUrl();
         Call<DataParse> call = client.getAllUpcomingMatches(AllStrings.API_KEY);

@@ -12,13 +12,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UrlBaseHandler {
 
+   private static CricketEndpoints cricketEndpoints;
 
 
 
     public static CricketEndpoints BaseUrl(){
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS);
+if(cricketEndpoints==null) {
+    OkHttpClient.Builder httpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS);
 
 //        OkHttpClient httpClient = new OkHttpClient();
 //        httpClient.readTimeoutMillis(60 * 1000, TimeUnit.MILLISECONDS)
@@ -36,15 +38,15 @@ public class UrlBaseHandler {
 //                        )
 //                        .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AllStrings.BASE_URL)
-                .client(httpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(AllStrings.BASE_URL)
+            .client(httpClient.build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+cricketEndpoints = retrofit.create(CricketEndpoints.class);
+}
 
-
-        return retrofit.create(CricketEndpoints.class);
-
+        return cricketEndpoints;
 
     }
 

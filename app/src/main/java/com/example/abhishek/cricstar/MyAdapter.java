@@ -19,14 +19,14 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
-    private MyListener myListener;
+        private List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
+        private MyListener myListener;
 
-    public class ViewHolder0 extends RecyclerView.ViewHolder {
+        private class ViewHolder0 extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView,mTextView2,serial_no,date_view;
-private CardView mCardView;
-        public ViewHolder0(View v) {
+        private TextView mTextView,mTextView2,serial_no,date_view;
+        private CardView mCardView;
+        private ViewHolder0(View v) {
             super(v);
 
             mCardView = v.findViewById(R.id.card_view);
@@ -49,10 +49,10 @@ private CardView mCardView;
     }
 
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder{
-        public TextView numberView;
+    private class ViewHolder1 extends RecyclerView.ViewHolder{
+        private TextView numberView;
 
-        public ViewHolder1(View v){
+        private ViewHolder1(View v){
             super(v);
             numberView = v.findViewById(R.id.team_id);
 
@@ -114,14 +114,8 @@ private CardView mCardView;
                 try {
                     SimpleDateFormat sdfSource = new SimpleDateFormat("yyyy-MM-dd");
                     String strDate = matchesListxx.get(position).getDate().substring(0, 10);
-                    //parse the string into Date object
-
                     Date date = sdfSource.parse(strDate);
-
-                    //create SimpleDateFormat object with desired date format
                     SimpleDateFormat sdfDestination = new SimpleDateFormat("dd MMM, yyyy");
-
-                    //parse the date into another format
                     strDate = sdfDestination.format(date);
                     viewHolder0.date_view.setText(strDate);
                 }

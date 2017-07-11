@@ -25,10 +25,17 @@ Button sign_up_button;
         return inflater.inflate(R.layout.fragment_signup, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        sign_up_button = view.findViewById(R.id.sinupbutton);
+        sign_up_button.setOnClickListener(this);
+
+    }
+
     public void onResume(){
         super.onResume();
-        sign_up_button = getView().findViewById(R.id.sinupbutton);
-        sign_up_button.setOnClickListener(this);
+
     }
     public void onClick(View view){
         Intent intent = new Intent(getActivity(),DashboardActivity.class);

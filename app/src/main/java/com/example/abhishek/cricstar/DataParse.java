@@ -27,7 +27,7 @@ public class DataParse {
         this.provider = provider;
     }
 
-    public class Provider{
+    protected class Provider{
 
         private String source;
         private String url;
@@ -95,7 +95,7 @@ public class DataParse {
     }
 
 
-    public class Matches{
+    protected class Matches{
         private long unique_id;
         private String date;
 
@@ -104,7 +104,7 @@ public class DataParse {
         private boolean squad;
         private boolean matchStarted;
         @SerializedName("team-1")
-        public String team1;
+        private String team1;
         @SerializedName("team-2")
         private String team2;
 

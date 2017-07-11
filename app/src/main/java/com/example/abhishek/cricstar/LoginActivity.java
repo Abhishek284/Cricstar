@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        setLogin();
 
    }
 
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onResume(){
         super.onResume();
-        setLogin();
+
 
 
     }
