@@ -1,10 +1,13 @@
 package com.example.abhishek.cricstar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +33,9 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     TextView CreditsLeftText,SourceText;
+    android.view.MenuItem menuItem;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +57,53 @@ public class DashboardActivity extends AppCompatActivity {
         // specify an adapter (see also next example)
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar,menu);
+        menuItem = (MenuItem) findViewById(R.id.action_favorite);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+        return true;
+        // Handle item selection
+
+    }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+
+    }
+
+
 
     protected void onResume(){
         super.onResume();
         CreditsLeftText = (TextView) findViewById(R.id.credits_left);
         SourceText = (TextView) findViewById(R.id.source_text);
 
+//        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                Intent intent = new Intent(, LoginActivity.class);
+//                startActivity(intent);
+//
+//                return true;
+//            }
+//        });
+
+
+
+
+
+
 
 
     }
+
 
     public void showToast()
     {

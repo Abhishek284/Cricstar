@@ -1,10 +1,12 @@
 package com.example.abhishek.cricstar;
 
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,8 +34,9 @@ public class LoginActivity extends AppCompatActivity {
        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-
    }
+
+
 
     public void onResume(){
         super.onResume();

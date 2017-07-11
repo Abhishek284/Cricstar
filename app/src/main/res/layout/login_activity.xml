@@ -9,7 +9,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecc8b8"
+    android:background="#cf926c"
     android:id="@+id/xxx"
     >
 

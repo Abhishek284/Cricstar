@@ -54,6 +54,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             case R.id.login_button:
                 Intent intent = new Intent(getActivity(),DashboardActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
+
 
         }
 

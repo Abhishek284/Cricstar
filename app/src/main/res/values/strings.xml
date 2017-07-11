@@ -7,5 +7,6 @@
     <string name="vs">  \u0020vs  \u0020  </string>
     <string name="dot">.  \u0020  </string>
     <string name="credits">Total Credits Left:</string>
+    <string name="logout">Logout</string>
 
 </resources>
