@@ -1,12 +1,16 @@
 package com.example.abhishek.cricstar;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,20 +18,36 @@ import java.util.List;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
+    private MyListener myListener;
 
     public class ViewHolder0 extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView,mTextView2,serial_no,date_view;
-
+private CardView mCardView;
         public ViewHolder0(View v) {
             super(v);
+
+            mCardView = v.findViewById(R.id.card_view);
             mTextView = v.findViewById(R.id.team_name);
             mTextView2= v.findViewById(R.id.team_name2);
             serial_no = v.findViewById(R.id.serial_no);
             date_view=v.findViewById(R.id.date);
+
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    myListener.callDetails(matchesListxx.get(getLayoutPosition()).getUnique_id());
+
+
+
+                }
+            });
         }
     }
+
 
     public class ViewHolder1 extends RecyclerView.ViewHolder{
         public TextView numberView;
@@ -36,12 +56,15 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(v);
             numberView = v.findViewById(R.id.team_id);
 
+
         }
 
     }
 
-    public MyAdapter(List<DataParse.Matches> x){
+    public MyAdapter(List<DataParse.Matches> x,MyListener myListener){
         this.matchesListxx = x;
+        this.myListener = myListener;
+
     }
 
 
@@ -51,6 +74,8 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType){
             case 0:
                 return new ViewHolder0(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_text_view,parent,false));
+
+            //Not used. Just for learning purpose
 
             case 1:
                 return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_number_view,parent,false));
@@ -65,7 +90,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        return vh;
 
     }
-
+//Not used. Just for learning purpose
 //    public int getItemViewType(int position){
 //        if (position >= matchesListxx.size()) {
 //            return 1;
@@ -85,7 +110,26 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewHolder0.mTextView.setText(matchesListxx.get(position).getTeam1());
                 viewHolder0.mTextView2.setText(matchesListxx.get(position).getTeam2());
                 viewHolder0.serial_no.setText(String.valueOf(position+1));
-                //viewHolder0.date_view.setText(matchesListxx.get(position).getDate());
+
+                try {
+                    SimpleDateFormat sdfSource = new SimpleDateFormat("yyyy-MM-dd");
+                    String strDate = matchesListxx.get(position).getDate().substring(0, 10);
+                    //parse the string into Date object
+
+                    Date date = sdfSource.parse(strDate);
+
+                    //create SimpleDateFormat object with desired date format
+                    SimpleDateFormat sdfDestination = new SimpleDateFormat("dd MMM, yyyy");
+
+                    //parse the date into another format
+                    strDate = sdfDestination.format(date);
+                    viewHolder0.date_view.setText(strDate);
+                }
+                catch (ParseException e){
+                    e.printStackTrace();
+
+                }
+
                 break;
             case 1:
                 ViewHolder1 viewHolder1 =(ViewHolder1)holder;

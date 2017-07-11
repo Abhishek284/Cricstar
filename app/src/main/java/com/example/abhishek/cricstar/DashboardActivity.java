@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener,MyListener{
     List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
 
     public String source;
@@ -34,6 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     TextView CreditsLeftText,SourceText;
     android.view.MenuItem menuItem;
+    View view ;
 
 
 
@@ -45,16 +47,8 @@ public class DashboardActivity extends AppCompatActivity {
         spinner.setVisibility(View.VISIBLE);
         CallApiAllMatches();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
 
     }
     @Override
@@ -69,12 +63,18 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
         return true;
-        // Handle item selection
 
     }
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+
+    }
+    public void callDetails(long i){
+        Intent intent = new Intent(this,MatchDetails.class);
+
+        startActivity(intent);
+
 
     }
 
@@ -85,29 +85,27 @@ public class DashboardActivity extends AppCompatActivity {
         CreditsLeftText = (TextView) findViewById(R.id.credits_left);
         SourceText = (TextView) findViewById(R.id.source_text);
 
-//        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem menuItem) {
-//                Intent intent = new Intent(, LoginActivity.class);
-//                startActivity(intent);
-//
-//                return true;
-//            }
-//        });
-
-
-
-
-
-
-
 
     }
+
+
+
 
 
     public void showToast()
     {
         Toast.makeText(this, text, duration).show();
+    }
+
+    public void onClick(View v){
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
 
@@ -128,10 +126,13 @@ public class DashboardActivity extends AppCompatActivity {
                 creditsLeft = response.body().getCreditsLeft();
                 d= response.body().getV();
                 System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
-                mAdapter = new MyAdapter(matchesListxx);
+                mAdapter = new MyAdapter(matchesListxx,DashboardActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
                 CreditsLeftText.setText(String.valueOf(response.body().getCreditsLeft()));
                 SourceText.setText(String.valueOf(response.body().getProvider().getSource()));
+
+
+
 
 
             }
