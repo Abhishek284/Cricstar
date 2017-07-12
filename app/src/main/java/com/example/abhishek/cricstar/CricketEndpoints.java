@@ -16,13 +16,14 @@ import retrofit2.http.Query;
 public interface CricketEndpoints {
     @SerializedName("Content-Type")
     public String ContentType =null;
-    @POST("/api/matches")
 
+    @GET("/api/matches")
     Call<DataParse> getAllUpcomingMatches(@Header("apikey") String apikey);
 
 
-//    @POST("/api/matches")
-//    Call<DataParse> getAllUpcomingMatches(@Header("ContentType") String ContentType, @Body DashboardActivity.ReqBody reqBody);
+
+    @POST("/api/fantasySquad")
+    Call<PlayersList> getAllPlayerList(@Header("ContentType") String ContentType, @Body MatchDetails.ReqBody reqBody);
 
 
 

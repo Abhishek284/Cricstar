@@ -71,8 +71,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
     public void callDetails(long i){
-        Intent intent = new Intent(this,MatchDetails.class);
+        long unique_id = i;
 
+        Intent intent = new Intent(this,MatchDetails.class);
+        intent.putExtra("unique_id",unique_id);
         startActivity(intent);
 
 
@@ -108,15 +110,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    public class ReqBody{
-        private String apikey;
-        public ReqBody(String s){
-            this.apikey=s;
 
-        }
 
-    }
-    ReqBody reqBody = new ReqBody("ScTdY9xQdyUfr0CxWybjHZPHMHC3");
 
 
 
@@ -158,39 +153,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-//    private void callPlayerList() {
-//
-//        CricketEndpoints client = UrlBaseHandler.BaseUrl();
-//        Call<DataParse> call = client.getAllUpcomingMatches("application/json",reqBody);
-//        call.enqueue(new Callback<DataParse>() {
-//            @Override
-//            public void onResponse(Call<DataParse> call, Response<DataParse> response) {
-//
-//                spinner.setVisibility(View.GONE);
-//                showToast();
-//                matchesListxx = response.body().getMatchesList();
-//                source = response.body().getProvider().getSource();
-//                creditsLeft = response.body().getCreditsLeft();
-//                d= response.body().getV();
-//                System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
-//                mAdapter = new MyAdapter(matchesListxx,DashboardActivity.this);
-//                mRecyclerView.setAdapter(mAdapter);
-//                CreditsLeftText.setText(String.valueOf(response.body().getCreditsLeft()));
-//                SourceText.setText(String.valueOf(response.body().getProvider().getSource()));
-//
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DataParse> call, Throwable t) {
-//                System.out.println("failed");
-//            }
-//
-//        });
-//    }
 
 
 }

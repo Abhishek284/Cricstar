@@ -18,7 +18,7 @@ public class PlayersList {
     public List<Squad> squad;
 
     public class Squad{
-        public String countryName;
+        public String name;
 
         public List<Players> getPlayers() {
             return players;
@@ -29,11 +29,11 @@ public class PlayersList {
         }
 
         public String getCountryName() {
-            return countryName;
+            return name;
         }
 
         public void setCountryName(String countryName) {
-            this.countryName = countryName;
+            this.name = countryName;
         }
 
         public List<Players> players;
@@ -44,11 +44,11 @@ public class PlayersList {
             public String pid;
 
             public String getPlayerName() {
-                return playerName;
+                return name;
             }
 
             public void setPlayerName(String playerName) {
-                this.playerName = playerName;
+                this.name = playerName;
             }
 
             public String getPid() {
@@ -59,7 +59,7 @@ public class PlayersList {
                 this.pid = pid;
             }
 
-            public String playerName;
+            public String name;
 
         }
 
