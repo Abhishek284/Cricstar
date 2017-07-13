@@ -101,12 +101,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     public void onClick(View v){
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
     }
 

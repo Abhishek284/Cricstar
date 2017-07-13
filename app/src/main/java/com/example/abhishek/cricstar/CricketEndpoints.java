@@ -7,7 +7,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * Created by abhishek on 04/07/17.
@@ -23,7 +22,7 @@ public interface CricketEndpoints {
 
 
     @POST("/api/fantasySquad")
-    Call<PlayersList> getAllPlayerList(@Header("ContentType") String ContentType, @Body MatchDetails.ReqBody reqBody);
+    Call<PlayersListResponse> getAllPlayerList(@Header("ContentType") String ContentType, @Body MatchDetails.ReqBody reqBody);
 
 
 

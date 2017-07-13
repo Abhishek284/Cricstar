@@ -6,7 +6,7 @@ import java.util.List;
  * Created by abhishek on 11/07/17.
  */
 
-public class PlayersList {
+public class PlayersListResponse {
     public List<Squad> getSquad() {
         return squad;
     }
