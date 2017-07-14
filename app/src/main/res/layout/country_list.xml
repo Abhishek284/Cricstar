@@ -23,6 +23,9 @@
         android:textSize="20dp"
         android:gravity="center_horizontal"/>
 
+
+
+
     <android.support.v7.widget.RecyclerView android:id="@+id/players_recycler_view_2"
         android:scrollbars="vertical"
         android:layout_width="match_parent"

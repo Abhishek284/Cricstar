@@ -1,12 +1,17 @@
 package com.example.abhishek.cricstar;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,11 +22,16 @@ public class MatchDetails extends AppCompatActivity {
     private CharSequence text = "Player List Not available";
     private int duration = Toast.LENGTH_SHORT;
     private long unique_id;
-    private List squadList;
+    private List<PlayersListResponse.Squad> squadList;
     private List playerlist;
     private RecyclerView mRecyclerView,mRecyclerView2;
-    private RecyclerView.Adapter playerListAdapter;
+    private RecyclerView.Adapter countryListAdapter;
     private RecyclerView.LayoutManager mLayoutManager,mLayoutManager2;
+    private ArrayList arrayList = new ArrayList();
+    private ProgressBar spinner;
+    private int arrayIndex=0,playerListSize=0,playerListIndex =0,squadIndex=0,squadSize =0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +40,15 @@ public class MatchDetails extends AppCompatActivity {
         Intent intent = getIntent();
         unique_id = intent.getLongExtra("unique_id", unique_id);
         callPlayerList(unique_id);
+        spinner = (ProgressBar) findViewById(R.id.progressBar_matchdetails);
+        spinner.setVisibility(View.VISIBLE);
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.players_recycler_view);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-//        mRecyclerView2 = (RecyclerView) findViewById(R.id.players_recycler_view_2);
-       mLayoutManager2 = new LinearLayoutManager(this);
-//        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
     }
     public class ReqBody{
@@ -56,11 +66,32 @@ public class MatchDetails extends AppCompatActivity {
         Toast.makeText(this, text, duration).show();
     }
 
+    private ArrayList generateArrayList(PlayersListResponse response){
+        while (squadSize!=0){
+            arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getCountryName());
+            arrayIndex++;
+            playerListSize = response.getSquad().get(squadIndex).getPlayers().size();
+            while (playerListSize!=0){
+                arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getPlayers().get(playerListIndex).getPlayerName());
+                playerListSize--;
+                playerListIndex++;
+                arrayIndex++;
+            }
+            playerListSize=0;
+            playerListIndex=0;
+            squadSize--;
+            squadIndex++;
+
+        }
+
+        return arrayList;
+    }
+
 
 
 
     private void callPlayerList(long unique_id) {
-        final MatchDetails.ReqBody reqBody = new MatchDetails.ReqBody("ScTdY9xQdyUfr0CxWybjHZPHMHC3",unique_id);
+        final MatchDetails.ReqBody reqBody = new MatchDetails.ReqBody(AllStrings.API_KEY,unique_id);
 
 
         CricketEndpoints client = UrlBaseHandler.BaseUrl();
@@ -70,31 +101,24 @@ public class MatchDetails extends AppCompatActivity {
             public void onResponse(Call<PlayersListResponse> call, Response<PlayersListResponse> response) {
 
 
-//                spinner.setVisibility(View.GONE);
-//                showToast();
+
+                spinner.setVisibility(View.GONE);
                 squadList = response.body().getSquad();
-                //playerlist = response.body().getSquad().get(1).getPlayers();
                 System.out.println("Success" + " "+ response.code());
-
+                squadSize = squadList.size();
                 if(squadList.size()>0) {
+                    arrayList = generateArrayList(response.body());
+                    System.out.println(arrayList.size());
 
-                    playerListAdapter = new PlayerListAdapter(squadList, getApplicationContext());
-                    mRecyclerView.setAdapter(playerListAdapter);
+                    countryListAdapter = new CountryListAdapter(squadList, getApplicationContext(),arrayList);
+                    mRecyclerView.setAdapter(countryListAdapter);
                 }
 
                 else {
                     showToast();
                 }
 
-//                matchesListxx = response.body().getMatchesList();
-//                source = response.body().getProvider().getSource();
-//                creditsLeft = response.body().getCreditsLeft();
-//                d= response.body().getV();
-//                System.out.println("There you go"+" "+ matchesListxx.get(2).getUnique_id() + " " + source +" " + d +" "+ creditsLeft);
-//                mAdapter = new MyAdapter(matchesListxx,DashboardActivity.this);
-//                mRecyclerView.setAdapter(mAdapter);
-//                CreditsLeftText.setText(String.valueOf(response.body().getCreditsLeft()));
-//                SourceText.setText(String.valueOf(response.body().getProvider().getSource()));
+
 
 
 

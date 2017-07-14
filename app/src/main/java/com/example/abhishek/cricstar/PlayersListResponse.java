@@ -18,6 +18,8 @@ public class PlayersListResponse {
     public List<Squad> squad;
 
     public class Squad{
+
+
         public String name;
 
         public List<Players> getPlayers() {

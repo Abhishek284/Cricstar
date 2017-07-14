@@ -54,7 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private ViewHolder1(View v){
             super(v);
-            numberView = v.findViewById(R.id.team_id);
+          //  numberView = v.findViewById(R.id.team_id);
 
 
         }
@@ -78,7 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             //Not used. Just for learning purpose
 
             case 1:
-                return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_number_view,parent,false));
+                return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_player_name_view,parent,false));
             default: return null;
         }
 
