@@ -22,7 +22,6 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private ArrayList<ArrayListModalClass> arrayList;
     private int viewtype;
-    int serial_no = 1;
 
 
     public List<PlayersListResponse.Squad> squadList;
@@ -107,7 +106,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 break;
             case 1:
                 ViewHolder1 viewHolder1 = (ViewHolder1)holder;
-                viewHolder1.player_nameview.setText(arrayList.get(i).getSerial()+1+" "+arrayList.get(i).getName());
+                viewHolder1.player_nameview.setText(arrayList.get(i).getSerial()+1+". "+arrayList.get(i).getName());
                 break;
 
         }
