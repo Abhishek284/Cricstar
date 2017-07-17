@@ -1,9 +1,11 @@
 package com.example.abhishek.cricstar;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -27,15 +29,26 @@ import retrofit2.Response;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
+private SharedPreferences sharedPreferences;
+    private String email;
+    private String password;
 
     @Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         setLogin();
+        sharedPreferences = getSharedPreferences(getPackageName(), Activity.MODE_PRIVATE);
+        email = sharedPreferences.getString("Email", "");
+        if (!email.isEmpty()){
+            Intent intent = new Intent(this,DashboardActivity.class);
+            startActivity(intent);
+            finish();
 
-   }
+        }
+
+
+    }
 
 
 

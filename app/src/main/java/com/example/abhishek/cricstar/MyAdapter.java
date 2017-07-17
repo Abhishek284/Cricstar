@@ -22,7 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private List<DataParse.Matches> matchesListxx = new ArrayList<DataParse.Matches>();
         private MyListener myListener;
 
-        private class ViewHolder0 extends RecyclerView.ViewHolder {
+        private class ViewHolder0 extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         private TextView mTextView,mTextView2,serial_no,date_view;
         private CardView mCardView;
@@ -34,20 +34,31 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mTextView2= v.findViewById(R.id.team_name2);
             serial_no = v.findViewById(R.id.serial_no);
             date_view=v.findViewById(R.id.date);
+            mCardView.setOnClickListener(this);
 
 
-            mCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+//            mCardView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//
+//                    myListener.callDetails(matchesListxx.get(getLayoutPosition()).getUnique_id());
+//
+//
+//
+//                }
+//            });
 
 
-                    myListener.callDetails(matchesListxx.get(getLayoutPosition()).getUnique_id());
-
-
-
-                }
-            });
         }
+            public void onClick(View view) {
+
+
+                myListener.callDetails(matchesListxx.get(getLayoutPosition()).getUnique_id());
+
+
+
+            }
     }
 
 

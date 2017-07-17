@@ -43,7 +43,6 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             country_name=view.findViewById(R.id.country_name);
 
 
-
 //          Use for nested recycler iew
 //            mRecyclerView2 =  view.findViewById(R.id.players_recycler_view_2);
 //            mLayoutManager = new LinearLayoutManager(context);

@@ -37,7 +37,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Password"/>
+        android:hint="Enter Password"
+        android:id="@+id/password_edt"/>
     <Button
         android:text="Login"
         android:layout_width="match_parent"

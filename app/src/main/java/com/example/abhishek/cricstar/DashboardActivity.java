@@ -2,6 +2,7 @@ package com.example.abhishek.cricstar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private TextView CreditsLeftText,SourceText;
     private android.view.MenuItem menuItem;
     private View view ;
+    private SharedPreferences sharedPreferences;
 
 
 
@@ -49,6 +51,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        sharedPreferences = getSharedPreferences(getPackageName(), Activity.MODE_PRIVATE);
+
 
     }
     @Override
@@ -59,8 +63,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item) {
+        sharedPreferences.edit().clear().apply();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+
         finish();
         return true;
 
