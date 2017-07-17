@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment implements View.OnClickListener{
-    TextView textView;
-    Button login_button;
-    EditText username, password;
+    private TextView textView;
+    private Button login_button;
+    private EditText username, password;
     private SharedPreferences sharedPreferences;
+    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private String email;
+    private String emailInvalid = "Please enter a valid email";
+private int duration = Toast.LENGTH_SHORT;
 
 
 
@@ -48,12 +53,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         login_button = view.findViewById(R.id.login_button);
         login_button.setOnClickListener(this);
         sharedPreferences = getActivity().getSharedPreferences(getActivity().getPackageName(), Activity.MODE_PRIVATE);
+
     }
 
     public void onResume(){
         super.onResume();
 
 
+    }
+    private void showToast(){
+        Toast.makeText(getActivity(), emailInvalid, duration).show();
     }
 
     public void onClick(View view){
@@ -72,12 +81,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             case R.id.login_button:
 
 
+                email = username.getText().toString().trim();
+                if(email.matches(emailPattern)){
+                    sharedPreferences.edit().putString("Email",username.getText().toString()).apply();
+                    sharedPreferences.edit().putString("Password", password.getText().toString()).apply();
+                    Intent intent = new Intent(getActivity(),DashboardActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+                else {
+                    showToast();
+                }
 
-                sharedPreferences.edit().putString("Email",username.getText().toString()).apply();
-                sharedPreferences.edit().putString("Password", password.getText().toString()).apply();
-                Intent intent = new Intent(getActivity(),DashboardActivity.class);
-                startActivity(intent);
-                getActivity().finish();
 
 
 
