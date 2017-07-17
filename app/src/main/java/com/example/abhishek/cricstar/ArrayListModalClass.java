@@ -6,5 +6,28 @@ package com.example.abhishek.cricstar;
 
 public class ArrayListModalClass {
 
-    private String countryName;
+    public int getSerial() {
+        return serial;
+    }
+
+    public void setSerial(int serial) {
+        this.serial = serial;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private int serial;
+    private String name;
+
+    public  ArrayListModalClass(int serial, String name){
+        this.serial=serial;
+        this.name=name;
+
+    }
 }

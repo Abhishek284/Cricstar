@@ -27,7 +27,7 @@ public class MatchDetails extends AppCompatActivity {
     private RecyclerView mRecyclerView,mRecyclerView2;
     private RecyclerView.Adapter countryListAdapter;
     private RecyclerView.LayoutManager mLayoutManager,mLayoutManager2;
-    private ArrayList arrayList = new ArrayList();
+    private ArrayList<ArrayListModalClass> arrayList = new ArrayList<>();
     private ProgressBar spinner;
     private int arrayIndex=0,playerListSize=0,playerListIndex =0,squadIndex=0,squadSize =0;
 
@@ -68,11 +68,13 @@ public class MatchDetails extends AppCompatActivity {
 
     private ArrayList generateArrayList(PlayersListResponse response){
         while (squadSize!=0){
-            arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getCountryName());
+            arrayList.add(arrayIndex, new ArrayListModalClass(squadIndex,response.getSquad().get(squadIndex).getCountryName()));
+            //arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getCountryName());
             arrayIndex++;
             playerListSize = response.getSquad().get(squadIndex).getPlayers().size();
             while (playerListSize!=0){
-                arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getPlayers().get(playerListIndex).getPlayerName());
+                arrayList.add(arrayIndex , new ArrayListModalClass(playerListIndex,response.getSquad().get(squadIndex).getPlayers().get(playerListIndex).getPlayerName()));
+                //arrayList.add(arrayIndex,response.getSquad().get(squadIndex).getPlayers().get(playerListIndex).getPlayerName());
                 playerListSize--;
                 playerListIndex++;
                 arrayIndex++;

@@ -35,9 +35,11 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             serial_no = v.findViewById(R.id.serial_no);
             date_view=v.findViewById(R.id.date);
 
+
             mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
 
                     myListener.callDetails(matchesListxx.get(getLayoutPosition()).getUnique_id());
 

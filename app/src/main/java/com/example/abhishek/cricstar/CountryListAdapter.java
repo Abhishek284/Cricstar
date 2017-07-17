@@ -20,14 +20,14 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private RecyclerView.Adapter playerListAdapterTwo;
     private RecyclerView.LayoutManager mLayoutManager,mLayoutManager2;
     private Context context;
-    private ArrayList arrayList;
+    private ArrayList<ArrayListModalClass> arrayList;
     private int viewtype;
     int serial_no = 1;
 
 
     public List<PlayersListResponse.Squad> squadList;
 
-    public CountryListAdapter(List<PlayersListResponse.Squad> squadList, Context context,ArrayList arrayList){
+    public CountryListAdapter(List<PlayersListResponse.Squad> squadList, Context context,ArrayList<ArrayListModalClass> arrayList){
         this.arrayList= arrayList;
         this.squadList = squadList;
         this.context=context;
@@ -71,7 +71,8 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemViewType(int position){
         viewtype =1;
         for (PlayersListResponse.Squad squad : squadList) {
-            if (squad.getCountryName().contains(arrayList.get(position).toString())) {
+            if (squad.getCountryName().contains(arrayList.get(position).getName())) {
+            //if (squad.getCountryName().contains(arrayList.get(position).toString())) {
                 viewtype = 0;
                 break;
             }
@@ -102,11 +103,11 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         switch (holder.getItemViewType()){
             case 0:
                 ViewHolder0 viewHolder0 = (ViewHolder0)holder;
-                viewHolder0.country_name.setText(arrayList.get(i).toString());
+                viewHolder0.country_name.setText(arrayList.get(i).getName());
                 break;
             case 1:
                 ViewHolder1 viewHolder1 = (ViewHolder1)holder;
-                viewHolder1.player_nameview.setText(arrayList.get(i).toString());
+                viewHolder1.player_nameview.setText(arrayList.get(i).getSerial()+1+" "+arrayList.get(i).getName());
                 break;
 
         }
