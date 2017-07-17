@@ -42,10 +42,7 @@ public class MatchDetails extends AppCompatActivity {
         callPlayerList(unique_id);
         spinner = (ProgressBar) findViewById(R.id.progressBar_matchdetails);
         spinner.setVisibility(View.VISIBLE);
-
-
         mRecyclerView = (RecyclerView) findViewById(R.id.players_recycler_view);
-
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
