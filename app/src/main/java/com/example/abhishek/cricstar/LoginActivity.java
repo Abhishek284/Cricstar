@@ -4,8 +4,12 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -32,12 +36,37 @@ public class LoginActivity extends AppCompatActivity {
 private SharedPreferences sharedPreferences;
     private String email;
     private String password;
+    private boolean usbConnected;
+    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (UsbManager.ACTION_USB_ACCESSORY_ATTACHED.equals(action)){
+
+                Toast.makeText(context, "Usb attached Intent Detected.", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+    };
 
     @Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         setLogin();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
+        registerReceiver(mUsbReceiver, filter);
+
+//
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
+//        registerReceiver(mUsbReceiver, filter);
+
+
+
         sharedPreferences = getSharedPreferences(getPackageName(), Activity.MODE_PRIVATE);
         email = sharedPreferences.getString("Email", "");
         if (!email.isEmpty()){
@@ -54,6 +83,9 @@ private SharedPreferences sharedPreferences;
 
     public void onResume(){
         super.onResume();
+
+
+
 
 
 

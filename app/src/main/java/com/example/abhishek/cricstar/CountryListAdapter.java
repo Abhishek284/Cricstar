@@ -1,11 +1,14 @@
 package com.example.abhishek.cricstar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -38,11 +41,39 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
     public class ViewHolder0 extends RecyclerView.ViewHolder{
         private TextView country_name;
+        private EditText country_name_edit;
 
-        public ViewHolder0(View view){
+
+        public ViewHolder0(final View view){
             super(view);
             country_name=view.findViewById(R.id.country_name);
+            country_name_edit = view.findViewById(R.id.country_name_edit_text);
+            country_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    country_name.setVisibility(View.GONE);
+                    country_name_edit.setVisibility(View.VISIBLE);
+                    country_name_edit.setText(country_name.getText());
+                }
+            });
+            country_name_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                    if(i== EditorInfo.IME_ACTION_DONE){
+                        country_name.setText(country_name_edit.getText());
+                        country_name_edit.setVisibility(View.GONE);
+                        country_name.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent();
+                        intent.setAction("com.test.CUSTOM_INTENT");
+                        context.sendBroadcast(intent);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
 
+                }
+            });
 
 //          Use for nested recycler iew
 //            mRecyclerView2 =  view.findViewById(R.id.players_recycler_view_2);
@@ -51,8 +82,10 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
-        }
-    }
+        }}
+
+
+
     public class ViewHolder1 extends RecyclerView.ViewHolder{
         private TextView player_nameview;
 
@@ -60,12 +93,9 @@ public class CountryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             super(view);
             player_nameview=view.findViewById(R.id.new_player_name);
 
-
-
-
-
         }
     }
+
     @Override
     public int getItemViewType(int position){
         viewtype =1;
