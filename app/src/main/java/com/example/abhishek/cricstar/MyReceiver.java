@@ -37,13 +37,13 @@ public class MyReceiver extends BroadcastReceiver {
 //            context.startActivity(launchIntent);
         }
         Toast.makeText(context , intent.getAction(),Toast.LENGTH_SHORT).show();
-        if(intent.getAction().equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")){
-            PackageManager pm = context.getPackageManager();
-            Intent launchIntent = pm.getLaunchIntentForPackage("com.example.abhishek.cricstar");
-            context.startActivity(launchIntent);
-            Toast.makeText(context, "USBBBB connected.", Toast.LENGTH_LONG).show();
-
-        }
+//        if(intent.getAction().equals("android.hardware.usb.action.USB_ACCESSORY_ATTACHED")){
+//            PackageManager pm = context.getPackageManager();
+//            Intent launchIntent = pm.getLaunchIntentForPackage("com.example.abhishek.cricstar");
+//            context.startActivity(launchIntent);
+//            Toast.makeText(context, "USBBBB connected.", Toast.LENGTH_LONG).show();
+//
+//        }
 
 
 }}

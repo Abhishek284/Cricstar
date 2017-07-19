@@ -37,18 +37,18 @@ private SharedPreferences sharedPreferences;
     private String email;
     private String password;
     private boolean usbConnected;
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (UsbManager.ACTION_USB_ACCESSORY_ATTACHED.equals(action)){
-
-                Toast.makeText(context, "Usb attached Intent Detected.", Toast.LENGTH_LONG).show();
-
-            }
-
-        }
-    };
+//    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (UsbManager.ACTION_USB_ACCESSORY_ATTACHED.equals(action)){
+//
+//                Toast.makeText(context, "Usb attached Intent Detected.", Toast.LENGTH_LONG).show();
+//
+//            }
+//
+//        }
+//    };
 
     @Override
    public void onCreate(Bundle savedInstanceState){
@@ -56,9 +56,9 @@ private SharedPreferences sharedPreferences;
         setContentView(R.layout.login_activity);
         setLogin();
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
-        registerReceiver(mUsbReceiver, filter);
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
+//        registerReceiver(mUsbReceiver, filter);
 
 //
 //        IntentFilter filter = new IntentFilter();
